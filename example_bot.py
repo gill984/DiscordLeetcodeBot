@@ -20,4 +20,7 @@ async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
 
-client.run('OTk3ODczNzc1ODkyNzcwODQ2.G6z8cW.wHc-42ipw0RZoDDnvdNh9lynEoLLV2SoYJM6ww')
+token_file = open("pw.txt", "r")
+token = token_file.read()
+token_file.close()
+client.run(token)
