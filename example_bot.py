@@ -1,28 +1,24 @@
-# This example requires the 'message_content' intent.
-
 import discord
-print(discord.__version__)
+import scrape_leetcode
 
-intents = discord.Intents.default()
-intents.messages = True
+bot = discord.Bot()
 
-client = discord.Client(intents=intents)
-
-@client.event
+@bot.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f"We have logged in as {bot.user}")
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.slash_command(guild_ids=['997873023589818569'])
+async def hello(ctx):
+    await ctx.respond("Hello!")
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+@bot.slash_command(guild_ids=['997873023589818569'])
+async def leet(ctx):
+    channel = bot.get_channel(997873023589818572)
+    problem = scrape_leetcode.get_latest_problem_title()
+
+    await channel.create_thread(name=problem[1], message=None, auto_archive_duration=60, type=discord.ChannelType.public_thread, reason=None)
 
 token_file = open("pw.txt", "r")
 token = token_file.read()
 token_file.close()
-client.run(token)
-
-# activeDailyCodingChallengeQuestion
+bot.run(token)
