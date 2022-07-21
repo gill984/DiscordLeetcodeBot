@@ -18,7 +18,7 @@ async def leet(ctx):
         return
     
     for thread in threads:
-        if thread.name == problem[1]:
+        if thread.name == problem[1] and not thread.archived:
             await ctx.respond("A thread for this problem was already created here: " + thread.jump_url)
             return
     
