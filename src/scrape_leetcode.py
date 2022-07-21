@@ -6,7 +6,6 @@ from datetime import datetime, tzinfo
 import pytz
 
 # Return the latest daily leetcode problem title
-# I've seen this accidentally return the second to last problem for some reason
 def get_latest_problem_title():
     URL_START = 'href='
     URL_END = 'target='
