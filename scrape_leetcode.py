@@ -2,7 +2,8 @@ from time import strptime
 import requests
 from bs4 import BeautifulSoup
 import create_title
-from datetime import datetime
+from datetime import datetime, tzinfo
+import pytz
 
 # Return the latest daily leetcode problem title
 # I've seen this accidentally return the second to last problem for some reason
@@ -27,7 +28,7 @@ def get_latest_problem_title():
                 # Check if the current date is the date for the problem we found, that's the one we want
                 date = line[line.index(DATE_START) + len(DATE_START) : line.index(DATE_END) - 1]
                 problem_time = datetime.strptime(date, '%a %b %d %Y %X %Z%z')
-                if datetime.now().date() == problem_time.date():
+                if datetime.now(tz=pytz.UTC).date() == problem_time.date():
                     url = "https://leetcode.com" + line[line.index(URL_START) + len(URL_START) + 1 :line.index(URL_END) - 2]
                     break
         attempts += 1
@@ -37,8 +38,7 @@ def get_latest_problem_title():
 
     dashed_title = create_title.url_to_dashed_title(url)
     full_title = create_title.dashed_to_title(dashed_title)
-    print ([url, full_title])
     return [url, full_title]
 
 if __name__ == '__main__':
-    get_latest_problem_title()
+    print(get_latest_problem_title())
