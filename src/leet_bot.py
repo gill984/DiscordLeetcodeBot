@@ -22,7 +22,7 @@ async def leet(ctx):
             await ctx.respond("A thread for this problem was already created here: " + thread.jump_url)
             return
     
-    new_thread = await channel.create_thread(name=problem[1], message=None, auto_archive_duration=60, type=discord.ChannelType.public_thread, reason=None)
+    new_thread = await channel.create_thread(name=problem[1], message=None, auto_archive_duration=1, type=discord.ChannelType.public_thread, reason=None)
     await new_thread.send(problem[0])
     await ctx.respond("Created Thread!")
 
