@@ -8,9 +8,5 @@ def dashed_to_title(url):
     tokens = [token.capitalize() for token in tokens]
     return ' '.join(tokens)
 
-def TEST_dashed_to_title():
-    input = "hi-ok-no-what"
-    print(dashed_to_title(input))
-
 if __name__ == '__main__':
     print (url_to_dashed_title('https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/'))
